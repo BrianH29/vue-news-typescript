@@ -8,12 +8,13 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
+import Vue from 'vue';
 import { mapGetters } from 'vuex';
 import UserProfile from '../components/UserProfile.vue';
 import bus from '../utils/bus';
 
-export default {
+export default Vue.extend({
   components: {
     UserProfile,
   },
@@ -23,7 +24,7 @@ export default {
   computed: {
     ...mapGetters(['fetchedUser']),
   },
-};
+});
 </script>
 
 <style scoped>
