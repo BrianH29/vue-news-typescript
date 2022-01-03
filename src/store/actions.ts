@@ -1,10 +1,12 @@
 import { ActionContext } from 'vuex';
-import { fetchNews, NewsItem } from '@/api';
+import { fetchAsk, fetchList, fetchNews, NewsItem } from '@/api';
 import { RootState } from '@/store/state';
 import { Mutations, MutationTypes } from '@/store/mutations';
 
 enum ActionTypes {
   FETCH_NEWS = 'FETCH_NEWS',
+  FETCH_LIST = 'FETCH_LIST',
+  FETCH_ASK = 'FETCH_ASk',
 }
 
 type MyActionContext = {
@@ -21,6 +23,22 @@ const actions = {
   ) {
     const { data } = await fetchNews();
     commit(MutationTypes.SET_NEWS, data);
+    return data;
+  },
+
+  async [ActionTypes.FETCH_ASK]({ commit }: MyActionContext) {
+    const { data } = await fetchAsk();
+    //commit(MutationTypes.SET_ASK, data);
+    commit(MutationTypes.SET_ASK, data);
+    return data;
+  },
+
+  async [ActionTypes.FETCH_LIST](
+    { commit }: MyActionContext,
+    listType: string,
+  ) {
+    const { data } = await fetchList(listType);
+    commit(MutationTypes.SET_LIST, data);
     return data;
   },
 };

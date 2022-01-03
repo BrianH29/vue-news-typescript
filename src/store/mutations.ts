@@ -24,11 +24,20 @@ import { NewsItem } from '@/api';
 
 enum MutationTypes {
   SET_NEWS = 'SET_NEWS',
+  SET_LIST = 'SET_LIST',
+  SET_ASK = 'SET_ASK',
 }
 
 const mutations = {
   [MutationTypes.SET_NEWS](state: RootState, news: NewsItem[]) {
     state.news = news;
+  },
+  [MutationTypes.SET_ASK](state: RootState, ask: NewsItem[]) {
+    state.ask = ask;
+  },
+
+  [MutationTypes.SET_LIST](state: RootState, list: NewsItem[]) {
+    state.list = list;
   },
 };
 

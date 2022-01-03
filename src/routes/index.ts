@@ -4,6 +4,7 @@ import { ItemView, UserView } from '../views';
 import createListView from '@/views/CreateListView';
 import bus from '../utils/bus';
 import store from '../store';
+import { ActionTypes } from '@/store/actions';
 
 Vue.use(VueRouter);
 
@@ -23,16 +24,17 @@ export default new VueRouter({
         routeFrom: Route,
         next: NavigationGuardNext,
       ) {
-        // bus.$emit('on:progress');
-        // try {
-        //   await store.dispatch('FETCH_LIST', routeTo.name);
-        //   next();
-        // } catch (error) {
-        //   new Error('failed to fetch news items');
-        //   //실패했을 경우의 경로
-        //   // next('/error');
-        // }
-        next();
+        bus.$emit('on:progress');
+        try {
+          await store.dispatch(ActionTypes.FETCH_NEWS, routeTo.name);
+          next();
+        } catch (error) {
+          new Error('failed to fetch news items');
+          //실패했을 경우의 경로
+          // next('/error');
+        }
+
+        // next();
         // store
         //   .dispatch('FETCH_LIST', routeTo.name)
         //   .then(() => next())
@@ -43,24 +45,46 @@ export default new VueRouter({
       path: '/ask',
       name: 'ask',
       component: createListView('AskView'),
-      beforeEnter(routeTo: Route, routeFrom: Route, next: NavigationGuardNext) {
+      async beforeEnter(
+        routeTo: Route,
+        routeFrom: Route,
+        next: NavigationGuardNext,
+      ) {
         bus.$emit('on:progress');
-        store
-          .dispatch('FETCH_LIST', routeTo.name)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch news items'));
+
+        try {
+          await store.dispatch(ActionTypes.FETCH_ASK, routeTo.name);
+          next();
+        } catch (error) {
+          new Error('failed to fetch news items');
+        }
+        // store
+        //   .dispatch('FETCH_LIST', routeTo.name)
+        //   .then(() => next())
+        //   .catch(() => new Error('failed to fetch news items'));
       },
     },
     {
       path: '/jobs',
       name: 'jobs',
       component: createListView('JobsView'),
-      beforeEnter(routeTo: Route, routeFrom: Route, next: NavigationGuardNext) {
+      async beforeEnter(
+        routeTo: Route,
+        routeFrom: Route,
+        next: NavigationGuardNext,
+      ) {
         bus.$emit('on:progress');
-        store
-          .dispatch('FETCH_LIST', routeTo.name)
-          .then(() => next())
-          .catch(() => new Error('failed to fetch news items'));
+
+        try {
+          await store.dispatch(ActionTypes.FETCH_LIST, routeTo.name);
+          next();
+        } catch (error) {
+          new Error(`failed to fetch news items ${error}`);
+        }
+        // store
+        //   .dispatch('FETCH_LIST', routeTo.name)
+        //   .then(() => next())
+        //   .catch(() => new Error('failed to fetch news items'));
       },
     },
     {

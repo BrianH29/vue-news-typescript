@@ -10,7 +10,7 @@ const api = {
 
 export interface NewsItem {
   comments_count: number;
-  domain: string;
+  domain?: string;
   id: number;
   points: number;
   time: number;
@@ -43,7 +43,7 @@ function fetchItem(id: any) {
   return axios.get(url);
 }
 
-function fetchList(type: any) {
+function fetchList(type: string) {
   const url = `https://api.hnpwa.com/v0/${type}/1.json`;
   return axios.get(url);
 }
