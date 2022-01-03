@@ -14,6 +14,7 @@ import Spinner from './components/Spinner.vue';
 import bus from './utils/bus';
 
 import Vue from 'vue';
+
 export default Vue.extend({
   components: {
     ToolBar,
@@ -32,8 +33,7 @@ export default Vue.extend({
       this.loading = false;
     },
   },
-  created() {
-    this.$store.state.news = 10;
+  async created() {
     bus.$on('on:progress', this.onProgress);
     bus.$on('off:progress', this.offProgress);
   },

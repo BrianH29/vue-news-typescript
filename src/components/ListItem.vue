@@ -52,9 +52,9 @@ export default Vue.extend({
     /* timeAgo(): string {
       return this.item[0].time_ago.concat();
     },*/
-    listItems(): any {
-      return this.$store.getters.fetchedList;
-    },
+    // listItems(): any {
+    //   return this.$store.getters.fetchedList;
+    // },
   },
 
   methods: {
