@@ -2,6 +2,7 @@ import { CommitOptions, DispatchOptions, Store } from 'vuex';
 import { Mutations } from './mutations';
 import { RootState } from './state';
 import { Actions } from '@/store/actions';
+import { Getters } from '@/store/getters';
 
 type MyMutations = {
   commit<K extends keyof Mutations, P extends Parameters<Mutations[K]>[1]>(
@@ -19,9 +20,19 @@ type MyActions = {
   ): ReturnType<Actions[K]>;
 };
 
-export type MyStore = Omit<Store<RootState>, 'commit' | 'dispatch'> &
+type MyGetters = {
+  getters: {
+    [K in keyof Getters]: ReturnType<Getters[K]>;
+  };
+};
+
+export type MyStore = Omit<
+  Store<RootState>,
+  'commit' | 'dispatch' | 'getters'
+> &
   MyMutations &
-  MyActions;
+  MyActions &
+  MyGetters;
 
 /**
  * Omit 이란 type 중에서 특정한거 제외 한것 만

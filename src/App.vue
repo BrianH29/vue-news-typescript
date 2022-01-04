@@ -36,7 +36,7 @@ export default Vue.extend({
     },
   },
   async created() {
-    this.$store;
+    this.$store.getters.fetchedList;
     // this.$store.state.news;
     // this.$store.commit(MutationTypes.SET_NEWS, 10);
     // const response = await this.$store.dispatch(ActionTypes.FETCH_NEWS);

@@ -2,6 +2,7 @@ import { ActionContext } from 'vuex';
 import { fetchAsk, fetchList, fetchNews, NewsItem } from '@/api';
 import { RootState } from '@/store/state';
 import { Mutations, MutationTypes } from '@/store/mutations';
+import { AxiosPromise } from 'axios';
 
 enum ActionTypes {
   FETCH_NEWS = 'FETCH_NEWS',
@@ -36,7 +37,7 @@ const actions = {
   async [ActionTypes.FETCH_LIST](
     { commit }: MyActionContext,
     listType: string,
-  ) {
+  ): Promise<NewsItem[]> {
     const { data } = await fetchList(listType);
     commit(MutationTypes.SET_LIST, data);
     return data;

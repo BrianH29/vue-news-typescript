@@ -20,7 +20,7 @@
 // };
 
 import { RootState } from '@/store/state';
-import { NewsItem } from '@/api';
+import { NewsItem } from '@/interface/ListInterface';
 
 enum MutationTypes {
   SET_NEWS = 'SET_NEWS',
@@ -37,6 +37,7 @@ const mutations = {
   },
 
   [MutationTypes.SET_LIST](state: RootState, list: NewsItem[]) {
+    console.log('mutation set_list : ', list);
     state.list = list;
   },
 };

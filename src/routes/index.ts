@@ -26,7 +26,7 @@ export default new VueRouter({
       ) {
         bus.$emit('on:progress');
         try {
-          await store.dispatch(ActionTypes.FETCH_NEWS, routeTo.name);
+          await store.dispatch(ActionTypes.FETCH_LIST, routeTo.name);
           next();
         } catch (error) {
           new Error('failed to fetch news items');
@@ -53,7 +53,7 @@ export default new VueRouter({
         bus.$emit('on:progress');
 
         try {
-          await store.dispatch(ActionTypes.FETCH_ASK, routeTo.name);
+          await store.dispatch(ActionTypes.FETCH_LIST, routeTo.name);
           next();
         } catch (error) {
           new Error('failed to fetch news items');

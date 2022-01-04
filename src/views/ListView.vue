@@ -26,8 +26,9 @@ export default Vue.extend({
 
   methods: {
     async fetchNewsItems() {
-      const response = await fetchNews();
-      this.newsItems = response.data;
+      // const response = await fetchNews();
+      // this.newsItems = response.data;
+      this.newsItems = this.$store.getters.fetchedList;
     },
   },
 });

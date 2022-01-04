@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts">
-import { NewsItem } from '@/api';
+import { NewsItem } from '@/interface/ListInterface';
 import Vue, { PropType } from 'vue';
 
 export default Vue.extend({

@@ -1,4 +1,4 @@
-import { NewsItem } from '@/api';
+import { NewsItem } from '@/interface/ListInterface';
 
 const state = {
   news: [] as NewsItem[],
